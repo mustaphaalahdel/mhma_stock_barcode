@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="external_layout_custom_barcode">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+            <t t-if="not company">
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+        
+            <div class="header">
+                <div class="d-flex justify-content-between align-items-center" style="width: 100%; direction: ltr; border-bottom: 1px solid #000; padding-bottom: 3px;">
+                    <!-- الدولة -->
+                    <div t-attf-style="width: 30%; text-align: start;">
+                        <div style="margin-bottom: 3px;" t-if="company" t-esc="company.email"/>
+                        <div style="margin-bottom: 3px;" t-if="company" t-esc="company.phone"/>
+                        <div style="margin-bottom: 3px;" t-if="company" t-esc="company.mobile"/>
+                    </div>
+        
+                    <!-- الشعار -->
+                    <div style="width: 40%; text-align: center;">
+                        <t t-if="company.logo">
+                            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 80px; max-width: 75%" alt="Logo"/>
+                        </t>
+                    </div>
+        
+                    <!-- اسم الشركة -->
+                    <div t-attf-style="width: 30%; text-align: end;">
+                        <div style="margin-bottom: 3px;">Republic of Yemen</div>
+                        <div style="margin-bottom: 3px;" t-if="company" t-esc="company.name"/>
+                        <div style="margin-bottom: 3px;" t-if="company" t-esc="company.street"/>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="article o_report_layout_standard">
+                <t t-out="0" />
+            </div>
+        
+            <div class="footer">
+                <div class="text-center" style="border-top: 1px solid black; padding-top: 3px" >
+                    <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+            
+        </template>
+        
+        <!-- <template id="external_layout_custom_2" inherit_id="web.external_layout_standard">
+
+            <xpath expr="//div[@t-attf-class='header o_company_#{company.id}_layout']" position="replace">
+                <div></div>
+            </xpath>
+
+        </template> -->
+    
+    </data>
+</odoo>

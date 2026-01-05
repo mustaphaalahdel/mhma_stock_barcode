@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_inventory_adjustment">
+            <t t-call="web.html_container">
+                <div class="oe_structure"></div>
+                <t t-call="mhma_stock_barcode.external_layout_custom_barcode">
+                    <div class="page">
+                        <br />
+                        <h2>Inventory Adjustment</h2>
+                        <p> Employee: <t t-esc="env.user.name" />
+                            <br /> 
+                            DateTime: <t t-esc="time.strftime('%Y-%m-%d %H:%M')" />
+                        </p>
+                        <t t-set="locations" t-value="docs.mapped('location_id')" />
+                        <div class="oe_structure"></div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th groups="stock.group_stock_multi_locations">
+                                        <strong>Location</strong>
+                                    </th>
+                                    <th>
+                                        <strong>Product</strong>
+                                    </th>
+                                    <th groups="stock.group_production_lot">
+                                        <strong>Lot/Serial Number</strong>
+                                    </th>
+                                    <th groups="stock.group_tracking_lot">
+                                        <strong>Package</strong>
+                                    </th>
+                                    <th class="text-end">
+                                        <strong>Available Quantity</strong>
+                                    </th>
+                                    <th class="text-end">
+                                        <strong>On hand Quantity</strong>
+                                    </th>
+                                    <th class="text-end">
+                                        <strong>Counted Quantity</strong>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="locations" t-as="location"> 
+                                    <tr groups="stock.group_stock_multi_locations">
+                                        <td colspan="2">
+                                            <span t-out="location.display_name">Shelf A</span>
+                                        </td>
+                                        <td groups="stock.group_production_lot"></td>
+                                        <td groups="stock.group_tracking_lot"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr
+                                        t-foreach="docs.filtered(lambda quant: quant.location_id.id == location.id)"
+                                        t-as="line">
+                                        <td groups="stock.group_stock_multi_locations"></td>
+                                        <td>
+                                            <span t-field="line.product_id">Laptop</span>
+                                        </td>
+                                        <td groups="stock.group_production_lot">
+                                            <span t-field="line.lot_id"></span>
+                                        </td>
+                                        <td groups="stock.group_tracking_lot">
+                                            <span t-field="line.package_id">98</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-field="line.available_quantity">2</span>
+                                            <span t-field="line.product_uom_id"
+                                                groups="uom.group_uom">Units</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-field="line.quantity">5</span>
+                                            <span t-field="line.product_uom_id"
+                                                groups="uom.group_uom">Units</span>
+                                        </td>
+                                        <td class="text-end">
+                                            <!-- If 0, then leave blank so users have space to write
+                                            a number -->
+                                            <!-- <t t-if="line.inventory_quantity ==
+                                            0"><span></span></t>
+                                            <t t-else=""><span t-field="line.inventory_quantity">7</span></t> -->
+                                            <t t-if="line.inventory_quantity_set">
+                                                <span t-esc="line.inventory_quantity" />
+                                            </t>
+
+                                            <span t-field="line.product_uom_id"
+                                                groups="uom.group_uom">Units</span>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+
+                        <div class="signaturers" style="width: 100%;">
+                            <div style="height: 60px;"></div>
+                            <div class="d-flex justify-content-between align-items-center"
+                                style="width: 100%;">
+                                <div style="width: 33.33%; text-align: start;">
+                                    محاسب المخازن
+                                </div>
+                                <div style="width: 33.33%; text-align: center;">
+                                    مدير ادارة المشتريات والمخازن
+                                </div>
+                                <div style="width: 33.33%; text-align: end;">
+                                    مدير عام الموارد المالية
+                                </div>
+                            </div>
+                            <div style="height: 100px;"></div>
+                            <div class="d-flex justify-content-between align-items-center"
+                                style="width: 100%;">
+                                <div style="width: 50%; text-align: center;">
+                                    الاسم
+                                </div>
+                                <div style="width: 50%; text-align: center;">
+                                    التوقيع
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="oe_structure"></div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

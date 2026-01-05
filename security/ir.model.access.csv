@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_stock_barcode_cancel_operation","access.stock_barcode.cancel.operation","model_stock_barcode_cancel_operation","stock.group_stock_user",1,1,1,0
+
+
+access_stock_inventory_adjustment_only,stock.inventory adjustment only,model_stock_quant,adjustment_only_group,1,1,0,0

@@ -1,0 +1,19 @@
+<!-- data/report_paperformat.xml -->
+<odoo>
+    <!-- ❶ تعريف حجم الورق -->
+    <record id="portrait_custom_paperformat_barcode" model="report.paperformat">
+        <field name="name">Portrait Custom Paperformat</field>
+        <field name="default">False</field>
+        <field name="format">A4</field>          <!-- ISO size -->
+        <field name="orientation">Portrait</field>
+        <!-- الهوامش بالـ mm -->
+        <field name="margin_top">32</field>
+        <field name="margin_bottom">16</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">25</field>
+        <field name="dpi">90</field>
+        <field name="disable_shrinking" eval="False"/>
+    </record>
+</odoo>

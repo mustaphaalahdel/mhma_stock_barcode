@@ -1,0 +1,6 @@
+<odoo>
+    <record id="adjustment_only_group" model="res.groups">
+        <field name="name">Adjustment Only</field>
+    </record>
+
+</odoo>

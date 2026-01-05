@@ -1,0 +1,18 @@
+<odoo>
+    <record id="action_report_adjustment" model="ir.actions.report">
+        <field name="name">Inventory Adjustment (Barcode)</field>
+        <field name="model">stock.quant</field>
+        <field name="report_type">qweb-pdf</field>
+
+        <!-- اسم القالب -->
+        <field name="report_name">mhma_stock_barcode.report_inventory_adjustment</field>
+        <field name="report_file">mhma_stock_barcode.report_inventory_adjustment</field>
+
+        <field name="print_report_name">'Inventory Adjustment - %s' % (env.user.name)</field>
+
+        <!-- ربطه بالـ quant -->
+        <field name="binding_model_id" ref="stock.model_stock_quant"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="mhma_stock_barcode.portrait_custom_paperformat_barcode"/>
+    </record>
+</odoo>
